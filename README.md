@@ -15,4 +15,4 @@ Move - Up/Down/Left/Right Arrows
 
 ## Download the game
 
-https://github.com/AlexTerekhov141/Coursework2/archive/refs/heads/main.zip
+https://github.com/AlexTerekhov141/Coursework2.git
