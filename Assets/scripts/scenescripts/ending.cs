@@ -25,7 +25,7 @@ public class ending : MonoBehaviour
         {
             //points.Q<TextElement>().text = "points: " + playerController.pointsToShow.ToString();
         }
-        // Additional logic for updating the score text goes here
+        
     }
 
 }

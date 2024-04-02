@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    public GameObject TextUi;
     public GameObject enemyPrefab;
     public GameObject newEnemyPrefab;
     public GameObject newBossPrefab;
@@ -12,8 +13,9 @@ public class EnemySpawner : MonoBehaviour
     public float minDistanceFromPlayer = 5f;
     public float maxDistanceFromPlayer = 10f;
     public float timeBeforeNewEnemies = 5f;
-    public float timeBeforeNewBoss = 10f;
+    public float timeBeforeNewBoss = 15f;
     private PlayerController _playerController;
+    private float UpgradeTime = 20f;
     float spawnInterval = 3f;
     void Start()
     {
@@ -34,7 +36,16 @@ public class EnemySpawner : MonoBehaviour
             {
                 spawnPosition = GetRandomSpawnPosition();
             }
-            Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+            GameObject newEnemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+            Enemy enemyComponent = newEnemy.GetComponent<Enemy>();
+            
+            if (_playerController.time > UpgradeTime)
+            {
+                enemyComponent.SetHealth(5);
+                StartCoroutine(ShowTextUiForDuration(2f));
+                UpgradeTime = UpgradeTime + _playerController.time;
+            }
+
             yield return new WaitForSeconds(spawnInterval);
         }
     }
@@ -52,7 +63,14 @@ public class EnemySpawner : MonoBehaviour
                         spawnPosition = GetRandomSpawnPosition();
                     }
 
-                    Instantiate(newEnemyPrefab, spawnPosition, Quaternion.identity);
+                    GameObject newEnemy = Instantiate(newEnemyPrefab, spawnPosition, Quaternion.identity);
+                    NewEnemy enemyComponent = newEnemy.GetComponent<NewEnemy>();
+                    if (_playerController.time > UpgradeTime)
+                    {
+                        enemyComponent.SetHealth(3);
+                        
+                    }
+
                     yield return new WaitForSeconds(spawnInterval);
                 }
                 else
@@ -77,7 +95,13 @@ public class EnemySpawner : MonoBehaviour
                     spawnPosition = GetRandomSpawnPosition();
                 }
 
-                Instantiate(newBossPrefab, spawnPosition, Quaternion.identity);
+                GameObject newEnemy = Instantiate(newBossPrefab, spawnPosition, Quaternion.identity);
+                Boss enemyComponent = newEnemy.GetComponent<Boss>();
+                if (_playerController.time > UpgradeTime)
+                {
+                    enemyComponent.SetHealth(10);
+                }
+
                 yield return new WaitForSeconds(timeBeforeNewBoss);
             }
             else
@@ -88,6 +112,12 @@ public class EnemySpawner : MonoBehaviour
         
             
         
+    }
+    private IEnumerator ShowTextUiForDuration(float duration)
+    {
+        TextUi.SetActive(true);
+        yield return new WaitForSeconds(duration);
+        TextUi.SetActive(false);
     }
 
     Vector3 GetRandomSpawnPosition()

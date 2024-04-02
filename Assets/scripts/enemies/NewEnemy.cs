@@ -95,4 +95,8 @@ public class NewEnemy : MonoBehaviour
         Instantiate(dropObject, transform.position, Quaternion.identity);
         Destroy(explosionRef, 2f);
     }
+    public void SetHealth(float newHealth)
+    {
+        MaxHealt += newHealth;
+    }
 }

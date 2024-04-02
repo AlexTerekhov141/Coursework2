@@ -10,7 +10,7 @@ public class UpgradeSpawner : MonoBehaviour
     public float maxDistanceFromPlayer = 10f;
     public float timeBeforeUpgrade = 5f;
     private PlayerController _playerController;
-    float spawnInterval = 5f;
+    float spawnInterval = 30f;
     void Start()
     {
         _playerController = FindObjectOfType<PlayerController>();

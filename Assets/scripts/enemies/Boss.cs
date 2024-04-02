@@ -108,4 +108,8 @@ public class Boss : MonoBehaviour
         _gun1.Launch();
         _gun2.Launch();
     }
+    public void SetHealth(float newHealth)
+    {
+        MaxHealt += newHealth;
+    }
 }

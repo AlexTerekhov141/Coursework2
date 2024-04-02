@@ -20,7 +20,7 @@ public class Enemy : MonoBehaviour
 
     public float Health { get; set; }
     
-    public float MaxHealt = 2f;
+    [SerializeField]public float MaxHealt = 2f;
     
     bool aggressive = true;
     public GameObject projectilePrefab;
@@ -31,7 +31,7 @@ public class Enemy : MonoBehaviour
     private SpriteRenderer spriteRend;
     void Start()
     {
-        Debug.Log(Health);
+        Debug.Log("Health" + Health);
         spriteRend = GetComponent<SpriteRenderer>();
         matblink = Resources.Load("PlayerBlink", typeof(Material)) as Material;
         matDefault = spriteRend.material;
@@ -106,4 +106,10 @@ public class Enemy : MonoBehaviour
         Instantiate(dropObject, transform.position, Quaternion.identity);
         Destroy(explosionRef, 2f);
     }
+    
+    public void SetHealth(float newHealth)
+    {
+        MaxHealt += newHealth;
+    }
+
 }

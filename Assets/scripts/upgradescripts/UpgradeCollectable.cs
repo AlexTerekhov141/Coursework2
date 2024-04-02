@@ -24,6 +24,7 @@ public class UpgradeCollectable : MonoBehaviour
 
     void Update()
     {
+        Debug.Log("startime" + startTime);
         if (_playerController.GunTo == 2)
         {
             GunUpgradeUi.SetActive(false);
@@ -61,6 +62,17 @@ public class UpgradeCollectable : MonoBehaviour
         if (controller != null)
         {
             isPlayerOnCollectable = true;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            isPlayerOnCollectable = false;
+            if (startTime != 0)
+            {
+                startTime--;   
+            }
         }
     }
 

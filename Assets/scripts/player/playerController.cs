@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     private gun _gun;
     private gun1 _gun1;
     private gun2 _gun2;
+    public float shieldDamage = 1f;
     public static bool GameIsPaused = false;
     public GameObject pauseMenuUI;
     public GameObject endMenuUi;
@@ -23,7 +24,7 @@ public class PlayerController : MonoBehaviour
     private int gunStyle = 0;
     public float points;
     public float PointsToShow { get; private set; }
-    public float damage = 10f;
+    public float damage = 1f;
     public float needExp = 10;
     public float MaxHealth = 3f;
     public float Exp = 0;
@@ -38,8 +39,8 @@ public class PlayerController : MonoBehaviour
     public InputAction Projectile;
     Animator animator;
     Vector2 moveDirection = new Vector2(1, 0);
-    public float fireRate = 0.5f; // Âðåìÿ ìåæäó âûñòðåëàìè
-    private float nextFireTime = 0f; // Âðåìÿ ñëåäóþùåãî âûñòðåëà
+    public float fireRate = 1f; 
+    private float nextFireTime = 0f; 
     //blink 
     private Material matblink;
     private Material matDefault;
@@ -171,7 +172,10 @@ public class PlayerController : MonoBehaviour
 
     public void upgradeFireRate()
     {
-        fireRate = fireRate - 0.5f;
+        if (fireRate != 0.1f)
+        {
+            fireRate = fireRate - 0.1f;
+        }
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
     }

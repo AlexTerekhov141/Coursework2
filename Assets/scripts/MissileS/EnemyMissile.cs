@@ -5,12 +5,14 @@ using UnityEngine;
 public class EnemyMissileScript : MonoBehaviour
 {
     Rigidbody2D _rigidbody2d;
-    public float DamageTo { get; private set; }
+    public PlayerController _playerController;
+    public float DamageTo { get; set; }
     public float Damage = 1f;
-
-    // Awake is called when the Projectile GameObject is instantiated
+    private float timeUpgrade = 20f;
+    
     void Awake()
     {
+        _playerController = FindObjectOfType<PlayerController>();
         _rigidbody2d = GetComponent<Rigidbody2D>();
     }
 
@@ -20,6 +22,12 @@ public class EnemyMissileScript : MonoBehaviour
         if (transform.position.magnitude > 10000.0f)
         {
             Destroy(gameObject);
+        }
+
+        if (_playerController.time > timeUpgrade)
+        {
+            SetDamage(2);
+            timeUpgrade = timeUpgrade + _playerController.time;
         }
     }
 
@@ -40,5 +48,9 @@ public class EnemyMissileScript : MonoBehaviour
             player.DestroyPlayer(Damage);
            
         }
+    }
+    public void SetDamage(float newDamage)
+    {
+        Damage += newDamage;
     }
 }
