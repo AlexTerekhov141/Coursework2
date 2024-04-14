@@ -383,8 +383,8 @@ Transform:
   - {fileID: 2195465968615789001}
   - {fileID: 6894844420995182}
   - {fileID: 6265529580246613949}
-  - {fileID: 7461910884491991759}
   - {fileID: 7593166739125323323}
+  - {fileID: 7461910884491991759}
   - {fileID: 221711155611710971}
   - {fileID: 2712201002146529677}
   - {fileID: 8365039402597188325}
@@ -483,6 +483,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebab1c9f3d6f9c146b0c7843c61132e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shieldPrefab: {fileID: 0}
+  shieldDamage: 1
   pauseMenuUI: {fileID: 0}
   endMenuUi: {fileID: 0}
   HudMenuUi: {fileID: 0}

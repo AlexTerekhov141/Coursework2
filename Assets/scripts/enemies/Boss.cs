@@ -7,9 +7,7 @@ public class Boss : MonoBehaviour
 {
     private PlayerController playerController;
     public GameObject dropObject;
-    private gun _gun;
-    private gun1 _gun1;
-    private gun2 _gun2;
+    private gun[] _gun;
     private UnityEngine.Object Explosion;
     public GameObject projectilePrefab;
     // Start is called before the first frame update
@@ -31,9 +29,7 @@ public class Boss : MonoBehaviour
     private SpriteRenderer spriteRend;
     void Start()
     {
-        _gun = FindObjectOfType<gun>();
-        _gun1 = FindObjectOfType<gun1>();
-        _gun2 = FindObjectOfType<gun2>();
+        _gun = FindObjectsOfType<gun>();
         spriteRend = GetComponent<SpriteRenderer>();
         matblink = Resources.Load("PlayerBlink", typeof(Material)) as Material;
         matDefault = spriteRend.material;
@@ -83,7 +79,25 @@ public class Boss : MonoBehaviour
     public void DestroyEnemy()
     {
 
-        MaxHealt = MaxHealt - playerController.DamageTo;
+        MaxHealt = MaxHealt - playerController.ShieldTo;
+        spriteRend.material = matblink;
+        if (MaxHealt <= 0)
+        {
+            GameObject explosionRef = (GameObject)Instantiate(Explosion);
+            explosionRef.transform.position = new Vector3(transform.position.x, transform.position.y, -1);
+            Instantiate(dropObject, transform.position, Quaternion.identity);
+            Destroy(gameObject);
+            Destroy(explosionRef, 2f);
+        }
+        else
+        {
+            Invoke("ResetMaterial", .1f);
+        }
+    }
+    public void DestroyEnemyByShield()
+    {
+
+        MaxHealt = MaxHealt - playerController.shieldDamage;
         spriteRend.material = matblink;
         if (MaxHealt <= 0)
         {
@@ -104,9 +118,9 @@ public class Boss : MonoBehaviour
     }
     public void Launch()
     {
-        _gun.Launch();
-        _gun1.Launch();
-        _gun2.Launch();
+        _gun[0].Launch();
+        _gun[1].Launch();
+        _gun[2].Launch();
     }
     public void SetHealth(float newHealth)
     {

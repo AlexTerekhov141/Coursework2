@@ -92,7 +92,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4822050341406584156}
   - component: {fileID: 4296330399783247448}
-  - component: {fileID: 568543125353854886}
+  - component: {fileID: 1062078466738471659}
   m_Layer: 0
   m_Name: MidGun
   m_TagString: Untagged
@@ -160,7 +160,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.04621096, y: 0.063227355}
   m_EdgeRadius: 0
---- !u!114 &568543125353854886
+--- !u!114 &1062078466738471659
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -169,7 +169,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1444431157581695779}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffaf3cf19bfc98e40a641f1957f395f4, type: 3}
+  m_Script: {fileID: 11500000, guid: a895b90c69820d04692353c2f0fcd043, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 2325657871528956751, guid: 066a597ab1ec1fa4ca8b7b119f79f773, type: 3}
@@ -901,7 +901,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7838139021543410383}
   - component: {fileID: 7004677142197873420}
-  - component: {fileID: 6204474279821782263}
+  - component: {fileID: 5262369078480095840}
   m_Layer: 0
   m_Name: RightGun
   m_TagString: Untagged
@@ -969,7 +969,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.032441713, y: 0.080691926}
   m_EdgeRadius: 0
---- !u!114 &6204474279821782263
+--- !u!114 &5262369078480095840
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -978,7 +978,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6656149410819022793}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adbde0888dd13c44b85beb483769d69e, type: 3}
+  m_Script: {fileID: 11500000, guid: a895b90c69820d04692353c2f0fcd043, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 2325657871528956751, guid: 066a597ab1ec1fa4ca8b7b119f79f773, type: 3}

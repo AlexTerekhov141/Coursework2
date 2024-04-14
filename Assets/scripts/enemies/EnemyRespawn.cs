@@ -13,10 +13,14 @@ public class EnemySpawner : MonoBehaviour
     public float minDistanceFromPlayer = 5f;
     public float maxDistanceFromPlayer = 10f;
     public float timeBeforeNewEnemies = 5f;
-    public float timeBeforeNewBoss = 15f;
+    public float timeBeforeNewBoss = 10f;
     private PlayerController _playerController;
     private float UpgradeTime = 20f;
+    [SerializeField] public float upgradeDamage = 1f;
     float spawnInterval = 3f;
+    private float upradeHealthEnemy = 0f;
+    private float upradeHealthNewEnemy = 0f;
+    private float upradeHealthBoss = 0f;
     void Start()
     {
         _enemy = FindObjectOfType<Enemy>();
@@ -38,10 +42,11 @@ public class EnemySpawner : MonoBehaviour
             }
             GameObject newEnemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
             Enemy enemyComponent = newEnemy.GetComponent<Enemy>();
-            
+            enemyComponent.SetHealth(upradeHealthEnemy);
             if (_playerController.time > UpgradeTime)
             {
-                enemyComponent.SetHealth(5);
+                upgradeDamage += 1f;
+                upradeHealthEnemy += 3f;
                 StartCoroutine(ShowTextUiForDuration(2f));
                 UpgradeTime = UpgradeTime + _playerController.time;
             }
@@ -65,10 +70,10 @@ public class EnemySpawner : MonoBehaviour
 
                     GameObject newEnemy = Instantiate(newEnemyPrefab, spawnPosition, Quaternion.identity);
                     NewEnemy enemyComponent = newEnemy.GetComponent<NewEnemy>();
+                    enemyComponent.SetHealth(upradeHealthNewEnemy);
                     if (_playerController.time > UpgradeTime)
                     {
-                        enemyComponent.SetHealth(3);
-                        
+                        upradeHealthNewEnemy += 2f;
                     }
 
                     yield return new WaitForSeconds(spawnInterval);
@@ -97,9 +102,10 @@ public class EnemySpawner : MonoBehaviour
 
                 GameObject newEnemy = Instantiate(newBossPrefab, spawnPosition, Quaternion.identity);
                 Boss enemyComponent = newEnemy.GetComponent<Boss>();
+                enemyComponent.SetHealth(upradeHealthBoss);
                 if (_playerController.time > UpgradeTime)
                 {
-                    enemyComponent.SetHealth(10);
+                    upradeHealthBoss += 7f;
                 }
 
                 yield return new WaitForSeconds(timeBeforeNewBoss);

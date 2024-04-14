@@ -3,15 +3,17 @@ using System.Collections;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+
+
+
 public class PlayerController : MonoBehaviour
 {
     public GameObject shieldPrefab;
     private ScoreManager _scoreManager;
-    private gun _gun;
-    private gun1 _gun1;
-    private gun2 _gun2;
+    private gun[] _gun;
     public float shieldDamage = 1f;
     public static bool GameIsPaused = false;
+    public bool isShieldAdded { get; private set; }
     public GameObject pauseMenuUI;
     public GameObject endMenuUi;
     public GameObject HudMenuUi;
@@ -20,6 +22,8 @@ public class PlayerController : MonoBehaviour
     public float ExpToShow { get; private set; }
     public float ExpToNeed { get; private set; }
     public float DamageTo { get; private set; }
+    
+    public float ShieldTo { get; private set; }
     public int GunTo { get; set; }
     private int gunStyle = 0;
     public float points;
@@ -50,10 +54,9 @@ public class PlayerController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        isShieldAdded = false;
         _scoreManager = GetComponent<ScoreManager>();
-        _gun = FindObjectOfType<gun>();
-        _gun1 = FindObjectOfType<gun1>();
-        _gun2 = FindObjectOfType<gun2>();
+        _gun = FindObjectsOfType<gun>();
         spriteRend = GetComponent<SpriteRenderer>();
         matblink = Resources.Load("PlayerBlink", typeof(Material)) as Material;
         matDefault = spriteRend.material;
@@ -69,6 +72,7 @@ public class PlayerController : MonoBehaviour
         gunStyle = GunTo;
         time = Time.timeSinceLevelLoad;
         PointsToShow = points;
+        ShieldTo = shieldDamage;
         DamageTo = damage;
         LvlToShow = Lvl;
         ExpToShow = Exp;
@@ -86,8 +90,8 @@ public class PlayerController : MonoBehaviour
         
         Vector2 position = (Vector2)transform.position + move * (speed * Time.deltaTime); ;
         transform.position = position;
-        ///////////
-
+        
+        
         if (time >= nextFireTime)
         {
             
@@ -99,21 +103,16 @@ public class PlayerController : MonoBehaviour
     {
         if (gunStyle == 0)
         {
-            Vector2 direction = transform.up;
-
-            GameObject projectileObject =
-                Instantiate(projectilePrefab, rigidbody2d.position + direction * 1f, transform.rotation);
-            MissileScript projectile = projectileObject.GetComponent<MissileScript>();
-            projectile.Launch(direction, 600);
+            _gun[1].LaunchPlayer();
         }else if (gunStyle == 2)
         {
-            _gun.LaunchPlayer();
-            _gun1.LaunchPlayer();
-            _gun2.LaunchPlayer();
+            _gun[0].LaunchPlayer();
+            _gun[1].LaunchPlayer();
+            _gun[2].LaunchPlayer();
         }else if (gunStyle == 1)
         {
-            _gun1.LaunchPlayer();
-            _gun2.LaunchPlayer();
+            _gun[0].LaunchPlayer();
+            _gun[2].LaunchPlayer();
         }
     }
     public void DestroyPlayer(float Damage)
@@ -183,9 +182,14 @@ public class PlayerController : MonoBehaviour
     public void addShield()
     {
         GameObject shield = Instantiate(shieldPrefab, transform.position, Quaternion.identity);
+        isShieldAdded = true;
         shield.transform.parent = transform; 
     }
-    
+
+    public void upgradeShield()
+    {
+        shieldDamage = shieldDamage + 1f;
+    }
     public void exit()
     {
         Time.timeScale = 1f;

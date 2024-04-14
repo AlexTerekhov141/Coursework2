@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Windows;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
@@ -39,7 +40,6 @@ public class Score : MonoBehaviour
 
             
             progressBar.style.width = Length.Percent(progressa);
-
             
             if (progressa >= 100f)
             {

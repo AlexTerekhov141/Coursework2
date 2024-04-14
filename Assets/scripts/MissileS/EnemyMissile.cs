@@ -6,12 +6,14 @@ public class EnemyMissileScript : MonoBehaviour
 {
     Rigidbody2D _rigidbody2d;
     public PlayerController _playerController;
+    public EnemySpawner _EnemySpawner;
     public float DamageTo { get; set; }
     public float Damage = 1f;
     private float timeUpgrade = 20f;
     
     void Awake()
     {
+        _EnemySpawner = FindObjectOfType<EnemySpawner>();
         _playerController = FindObjectOfType<PlayerController>();
         _rigidbody2d = GetComponent<Rigidbody2D>();
     }
@@ -26,7 +28,8 @@ public class EnemyMissileScript : MonoBehaviour
 
         if (_playerController.time > timeUpgrade)
         {
-            SetDamage(2);
+            SetDamage(_EnemySpawner.upgradeDamage);
+            Debug.Log("upgrade Weapon" + Damage);
             timeUpgrade = timeUpgrade + _playerController.time;
         }
     }

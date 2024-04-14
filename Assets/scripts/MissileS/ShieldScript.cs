@@ -14,18 +14,18 @@ public class ShieldScript : MonoBehaviour
 
         if (enemy != null)
         {
-            enemy.DestroyEnemy();
+            enemy.DestroyEnemyByShield();
         }
 
         if (enemy2 != null)
         {
-            enemy2.DestroyEnemy();
+            enemy2.DestroyEnemyByShield();
             
         }
 
         if (enemy3 != null)
         {
-            enemy3.DestroyEnemy();
+            enemy3.DestroyEnemyByShield();
             
         }
     }

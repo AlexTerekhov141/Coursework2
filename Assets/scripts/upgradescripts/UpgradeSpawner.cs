@@ -5,17 +5,20 @@ using UnityEngine;
 public class UpgradeSpawner : MonoBehaviour
 {
     public GameObject UpgradePrefab;
+    public GameObject MagnitPrefab;
     public Transform playerTransform;
     public float minDistanceFromPlayer = 5f;
     public float maxDistanceFromPlayer = 10f;
     public float timeBeforeUpgrade = 5f;
     private PlayerController _playerController;
-    float spawnInterval = 30f;
+    private float MagnitInterval = 40f;
+    float spawnInterval = 20f;
     void Start()
     {
         _playerController = FindObjectOfType<PlayerController>();
         StartCoroutine(SpawnUpgrade());
-        
+        StartCoroutine(SpawnMagnit());
+
     }
 
     IEnumerator SpawnUpgrade()
@@ -32,6 +35,27 @@ public class UpgradeSpawner : MonoBehaviour
 
                 Instantiate(UpgradePrefab, spawnPosition, Quaternion.identity);
                 yield return new WaitForSeconds(spawnInterval);
+            }
+            else
+            {
+                yield return null;
+            }
+        }
+    }
+    IEnumerator SpawnMagnit()
+    {
+        while (true)
+        {
+            if (_playerController.time >= MagnitInterval)
+            {
+                Vector3 spawnPosition = GetRandomSpawnPosition();
+                while (Vector3.Distance(spawnPosition, playerTransform.position) < minDistanceFromPlayer)
+                {
+                    spawnPosition = GetRandomSpawnPosition();
+                }
+
+                Instantiate(MagnitPrefab, spawnPosition, Quaternion.identity);
+                yield return new WaitForSeconds(MagnitInterval);
             }
             else
             {

@@ -99,7 +99,13 @@ public class UpgradeCollectable : MonoBehaviour
         pauseMenuUI.SetActive(false);
         GameIsPaused = false;
         Time.timeScale = 1f;
-        _playerController.addShield();
+        if (_playerController.isShieldAdded == false)
+        {
+            _playerController.addShield();
+        }else if (_playerController.isShieldAdded == true)
+        {
+            _playerController.upgradeShield();
+        }
         Destroy(gameObject);   
     }
 }

@@ -5,8 +5,10 @@ using UnityEngine.SceneManagement;
 public class Pause : MonoBehaviour
 {
     public static bool GameIsPaused = false;
-
+    public static bool OptionsIsPaused = false;
     public GameObject pauseMenuUI;
+
+    public GameObject optionsUI;
     // Update is called once per frame
     void Update()
     {
@@ -24,15 +26,32 @@ public class Pause : MonoBehaviour
     }
     public void Resume()
     {
-        pauseMenuUI.SetActive(false);
-        Time.timeScale = 1f;
-        GameIsPaused = false;
+        if (OptionsIsPaused == false)
+        {
+            pauseMenuUI.SetActive(false);
+            Time.timeScale = 1f;
+            GameIsPaused = false;
+        }
+        else
+        {
+            pauseMenuUI.SetActive(true);
+            optionsUI.SetActive(false);
+            OptionsIsPaused = false;
+        }
     }
     void Pause_menu()
     {
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;
+    }
+
+    public void Options_menu()
+    {
+        pauseMenuUI.SetActive(false);
+        optionsUI.SetActive(true);
+        GameIsPaused = true;
+        OptionsIsPaused = true;
     }
     public void QuitGame()
     {

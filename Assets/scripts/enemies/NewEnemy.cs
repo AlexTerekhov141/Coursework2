@@ -71,6 +71,23 @@ public class NewEnemy : MonoBehaviour
         }
 
     }
+    public void DestroyEnemyByShield()
+    {
+        spriteRend.material = matblink;
+        MaxHealt = MaxHealt - playerController.ShieldTo;
+        Debug.Log("destroy" + MaxHealt + "shield" + playerController.shieldDamage);
+        if (MaxHealt <= 0)
+        {
+            ExplosionFunc();
+            Instantiate(dropObject, transform.position, Quaternion.identity);
+            Destroy(gameObject);
+          
+        }else
+        {
+            Invoke("ResetMaterial", .1f);
+        }
+
+    }
     public void ResetMaterial()
     {
         spriteRend.material = matDefault;
