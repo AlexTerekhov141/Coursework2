@@ -10,10 +10,6 @@ jobs:
     name: Release project
     runs-on: ubuntu-latest
     steps:
-    - name: Archieve
-      uses: thedoctor0/zip-release@master
-      with:
-        filename: game.zip
     - name: Create github release
       id: create-release
       uses: actions/create-release@v1
