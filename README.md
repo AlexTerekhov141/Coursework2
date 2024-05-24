@@ -18,4 +18,4 @@ Move - Up/Down/Left/Right Arrows
 
 ## Download the game
 
-https://github.com/AlexTerekhov141/Coursework2.git
+https://github.com/AlexTerekhov141/Coursework2/releases/download/Tag/builds.rar
